@@ -1,0 +1,26 @@
+package org.codeCanvas.domain;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Date;
+
+@Entity
+@Getter
+@Setter
+public class Board {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idx;
+    private String writer;
+    private String title;
+    private String content;
+    private String board;
+    private String image_name;
+    private String image_original_name;
+    private Date regDate;
+}
