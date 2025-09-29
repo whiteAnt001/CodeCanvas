@@ -22,3 +22,14 @@ spring:
   multipart:
     max-file-size: 10MB
     max-request-size: 10MB
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: westjun01@gmail.com   # Gmail 주소(일단 개인요ㅕ으로 넣음)
+    password: akcs buwr uigc jhtr      # 앱 비밀번호
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true

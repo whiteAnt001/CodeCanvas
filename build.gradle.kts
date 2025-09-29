@@ -23,6 +23,7 @@ dependencies {
     // 스프링 부트 설정
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-mail")
     // 스프링 시큐리티 설정
     implementation("org.springframework.boot:spring-boot-starter-security")
 

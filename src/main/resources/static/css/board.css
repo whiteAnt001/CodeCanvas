@@ -1,0 +1,50 @@
+/* board-view 전용 */
+.meta {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+.content {
+  white-space: pre-line;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.attachments {
+  margin-top: 20px;
+  padding: 12px;
+  border: 1px solid #e3e6ea;
+  border-radius: 8px;
+  background: #fafafa;
+}
+.attachments h3 {
+  font-size: 16px;
+  margin: 0 0 8px;
+}
+.attachments a {
+  display: block;
+  color: #1e1e2f;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+.attachments a:hover {
+  text-decoration: underline;
+}
+.btns {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 14px;
+}
+.btn-primary { background: #1e1e2f; color: #fff; }
+.btn-ghost { background: transparent; border: 1px solid #d6dbe3; color: #1e1e2f; }
+
+

@@ -1,9 +1,21 @@
 package org.codeCanvas.repository;
 
+import org.codeCanvas.domain.User;
+import org.codeCanvas.dto.AuthDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
-public class UserRepository  {
+public interface UserRepository extends JpaRepository<User, Long> {
+    // 유저 이름 찾기
+    Optional<User> findByUsername(String username);
+    // 유저 이름 중복검사
+    boolean existsByUsername(String username);
+    // 이메일 인증 토큰 찾기
+    User findByVerificationToken(String token);
+    // 이메일 중복확인
+    User findByEmail(String email);
 
 }

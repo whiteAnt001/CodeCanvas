@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -22,5 +23,5 @@ public class Board {
     private String board;
     private String image_name;
     private String image_original_name;
-    private Date regDate;
+    private LocalDateTime regDate;
 }

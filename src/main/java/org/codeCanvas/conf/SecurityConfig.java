@@ -18,8 +18,15 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/**")).permitAll() // 개발중엔 모든 요청 허용, 배포시 제약 걸어야함
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form.permitAll());
-
+                .formLogin(form -> form
+                        .loginPage("/login") // 커스텀 로그인 페이지
+                        .loginProcessingUrl("/login") // 로그인 처리 URL
+                        .defaultSuccessUrl("/", true)
+                        .permitAll()
+                )
+                .logout(logout -> logout.logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?loout")
+                );
         http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
 
         return http.build();

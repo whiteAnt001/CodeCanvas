@@ -8,7 +8,10 @@ import org.codeCanvas.util.FileUploadUtil;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +24,7 @@ public class BoardService {
         board.setContent(dto.getContent());
         board.setBoard(dto.getBoard());
         board.setWriter(dto.getWriter());
-        board.setRegDate(new Date());
+        board.setRegDate(LocalDateTime.now());
 
         if(dto.getFiles() != null && dto.getFiles().length > 0) {
             String[] savedFileNames = FileUploadUtil.saveFiles(dto.getFiles());
@@ -32,5 +35,14 @@ public class BoardService {
 
         dto.setImage_name(board.getImage_name());
         return dto;
+    }
+
+    // 카테고리 별 최신 5개 게시글만 가져오기
+    public List<Board> getListPostByCategory(String board) {
+        return boardRepository.findTop5ByBoardOrderByIdxDesc(board);
+    }
+
+    public Optional<Board> findByIdx(Long idx) {
+        return boardRepository.findById(idx);
     }
 }

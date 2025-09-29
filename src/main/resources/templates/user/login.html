@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCanvas - 로그인</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #f6f7fb;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+        }
+        .container {
+          background: #fff;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+          width: 350px;
+        }
+        h2 {
+          margin-bottom: 20px;
+          text-align: center;
+          color: #333;
+        }
+        .form-group {
+          margin-bottom: 15px;
+        }
+        .form-group label {
+          display: block;
+          margin-bottom: 6px;
+          font-size: 14px;
+          color: #555;
+        }
+        .form-group input {
+          width: 100%;
+          padding: 10px;
+          border-radius: 6px;
+          border: 1px solid #ddd;
+        }
+        button {
+          width: 100%;
+          padding: 12px;
+          border: none;
+          border-radius: 6px;
+          background: #4e73df;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+        button:hover {
+          background: #2e59d9;
+        }
+        .extra {
+          margin-top: 15px;
+          font-size: 14px;
+          text-align: center;
+        }
+        .extra a {
+          color: #4e73df;
+          text-decoration: none;
+        }
+        .extra a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>로그인</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="username">아이디</label>
+            <input type="text" id="username" name="username" required/>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required/>
+        </div>
+        <button type="submit">로그인</button>
+        <div class="extra">
+            아직 회원이 아니신가요? <a th:href="@{/join}">회원가입</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class FileUploadUtil {
 
-    private static final String UPLOAD_DIR = "uploads/";
+    private static final String UPLOAD_DIR = "static/uploads/";
 
     // 단일파일 저장
     public static String saveFile(MultipartFile file) throws IOException {

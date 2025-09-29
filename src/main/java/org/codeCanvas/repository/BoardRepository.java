@@ -9,5 +9,8 @@ import java.util.Optional;
 
 @Repository
 public interface BoardRepository extends JpaRepository<Board, Long> {
-    Optional<Board> findById(Long idx);
+    Optional<Board> findByIdx(Long idx);
+
+    // 특정 카테고리 게시글 중 최신 5개만 가져오기?
+    List<Board> findTop5ByBoardOrderByIdxDesc(String board);
 }
