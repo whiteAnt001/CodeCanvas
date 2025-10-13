@@ -1,8 +1,23 @@
 <header th:fragment="mainHeader">
     <h1><a href="/">CodeCanvas</a></h1>
+
     <nav>
-        <a href="/board/write">글쓰기</a>
-        <a href="#">프로필</a>
-        <a href="/login">로그인</a>
+        <div class="right-area">
+            <!-- 로그인된 경우 -->
+            <th:block th:if="${isLoggedIn}">
+                <div class="user-dropdown">
+                    <div class="user-dropdown-menu">
+                        <a href="/board/write">글쓰기</a>
+                        <a><span th:text="${loginUser.username}">사용자</span></a>
+                        <a href="#" id="logout-btn">로그아웃</a>
+                    </div>
+                </div>
+            </th:block>
+
+            <th:block th:unless="${isLoggedIn}">
+                <a href="/login">로그인 / 회원가입</a>
+            </th:block>
+            <script src="/js/auth.js"></script>
+        </div>
     </nav>
 </header>

@@ -7,10 +7,13 @@ import org.codeCanvas.dto.BoardDTO;
 import org.codeCanvas.repository.BoardRepository;
 import org.codeCanvas.repository.UserRepository;
 import org.codeCanvas.service.BoardService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -43,22 +46,23 @@ public class UserViewController {
     // 회원가입 화면
     @GetMapping("/join")
     public String join() {
-        return "user/join";
+        return "user/register";
     }
 
-    // 이메일 인증 화면
-    @GetMapping("/verify")
-    public String verifyEmail(@RequestParam("token") String token) {
-        User user = userRepository.findByVerificationToken(token);
+    // 소셜 로그인 닉네임 폼
+    @GetMapping("/check-nickname")
+    public String checkNickname(Model model, @AuthenticationPrincipal OAuth2User oAuth2User) {
+        model.addAttribute("providerId", oAuth2User.getAttribute("sub")); // 구글용
+        return "nickName";
+    }
 
-        if(user == null || user.getTokenExpiration().isBefore(LocalDateTime.now())) {
-            return "verify-fail";
-        }
-
-        user.setEnabled(true);
-        user.setVerificationToken(null);
+    @PostMapping("/check-nicname")
+    public String saveNickname(@RequestParam String username, @AuthenticationPrincipal OAuth2User oAuth2User) {
+        String providerId = oAuth2User.getAttribute("sub");
+        User user = userRepository.findByProviderId(providerId).orElseThrow(() ->
+            new RuntimeException("사용자 없음"));
+        user.setUsername(username);
         userRepository.save(user);
-
-        return "verify-success";
+        return "redirect:/";
     }
 }

@@ -24,8 +24,16 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-mail")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    // OAuth2 의존성
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
     // 스프링 시큐리티 설정
     implementation("org.springframework.boot:spring-boot-starter-security")
+
+    // JWT의존성
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
     // H2 DB 설정
     runtimeOnly("com.h2database:h2:2.3.232")

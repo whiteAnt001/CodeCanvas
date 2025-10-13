@@ -1,0 +1,159 @@
+/* 공통 스타일 */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f6f7fb;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  width: 380px; /* 로그인/회원가입 통일 폭 */
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #555;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  background: #4e73df; /* 기본 통일 색상 */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #2e59d9;
+}
+
+.extra {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+  color: #555;
+}
+
+.extra a {
+  color: #4e73df; /* 링크 색상 통일 */
+  text-decoration: none;
+}
+
+.extra a:hover {
+  text-decoration: underline;
+}
+
+/* 회원가입 닉네임 중복 체크 버튼 */
+#checkBtn {
+  width: auto;
+  padding: 6px 12px;
+  margin-left: 5px;
+  font-size: 12px;
+  display: inline-block;
+  background: #4e73df;
+  color: white;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#checkBtn:hover {
+  background: #2e59d9;
+}
+
+/* 비밀번호 확인 입력란 간격 조정 */
+#confirm {
+  margin-bottom: 0;
+}
+
+#checkResult {
+  display: block;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
+#checkResult.error {
+  color: #e74a3b; /* 사용중일 때 빨간색 */
+}
+
+#checkResult.success {
+  color: #28a745; /* 사용 가능할 때 파란색 */
+}
+
+       /* 소셜 로그인 버튼 스타일 */
+        .social-login {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            color: white;
+        }
+
+        .google-btn {
+            background-color: #db4437;
+        }
+
+        .google-btn:hover {
+            background-color: #c1351d;
+        }
+
+        .github-btn {
+            background-color: #333;
+        }
+
+        .github-btn:hover {
+            background-color: #000;
+        }
+
+        .social-btn svg {
+            margin-right: 8px;
+        }

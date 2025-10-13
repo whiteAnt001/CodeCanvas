@@ -1,0 +1,43 @@
+/* 공통 */
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background:#f6f7fb; color:#222; }
+.container { max-width:1200px; margin:40px auto; padding:0 20px; }
+
+/* 소개 섹션 */
+.intro {
+    background:#fff; text-align:center; padding:50px 20px; border-radius:12px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.1); margin-bottom:40px;
+}
+.intro h1 { font-size:36px; margin-bottom:15px; color:#1e1e2f; }
+.intro p { font-size:18px; color:#555; }
+
+/* 섹션 공통 */
+.section { margin-bottom:50px; }
+.section h2 { font-size:26px; margin-bottom:20px; color:#1e1e2f; }
+
+/* 카드 그리드 */
+.card-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;
+}
+.card {
+    background:#fff; border-radius:12px; padding:20px;
+    box-shadow:0 6px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.card:hover { transform:translateY(-5px); box-shadow:0 12px 20px rgba(0,0,0,0.12); }
+.card h3 { font-size:20px; margin-bottom:10px; color:#1e1e2f; }
+.card p { font-size:14px; color:#666; }
+
+/* 카드 이미지 */
+.card-img {
+    width:100%; height:150px; border-radius:8px; margin-bottom:10px;
+    background-size:cover; background-position:center;
+}
+
+/* footer */
+footer {
+    background:#1e1e2f; color:#fff; text-align:center; padding:25px;
+}
+
+a { text-decoration:none; color:inherit; }
+a:hover { color:#007bff; }

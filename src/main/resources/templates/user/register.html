@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeCanvas - 회원가입</title>
+    <link rel="stylesheet" href="/css/auth.css">
+</head>
+<body>
+<div class="container">
+    <h2>회원가입</h2>
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required/>
+        </div>
+        <div class="form-group">
+            <label for="username">닉네임</label>
+            <input type="text" id="username" name="username" required/>
+            <button type="button" id="checkBtn">중복 확인</button>
+            <span id="checkResult"></span>
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" id="password" name="password" required/>
+        </div>
+        <div class="form-group">
+            <label for="confirm">비밀번호 확인</label>
+            <input type="password" id="confirm" name="confirm" required/>
+        </div>
+        <button type="submit" class="register-btn">회원가입</button>
+        <div class="extra register">
+            이미 회원이신가요? <a th:href="@{/login}">로그인</a>
+        </div>
+    </form>
+</div>
+<script src="/js/auth.js"></script>
+</body>
+</html>

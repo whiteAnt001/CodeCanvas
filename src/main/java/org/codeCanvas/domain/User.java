@@ -38,6 +38,9 @@ public class User implements UserDetails {
 
     private String role;
 
+    private String provider; // google, github, local 등
+    private String providerId; // OAuth에서 주는 고유 ID
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(() -> role);

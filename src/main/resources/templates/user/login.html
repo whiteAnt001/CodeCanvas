@@ -3,88 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/auth.css">
+    <script src="/js/auth.js"></script>
     <title>CodeCanvas - 로그인</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          background: #f6f7fb;
-          margin: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          height: 100vh;
-        }
-        .container {
-          background: #fff;
-          padding: 30px;
-          border-radius: 12px;
-          box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-          width: 350px;
-        }
-        h2 {
-          margin-bottom: 20px;
-          text-align: center;
-          color: #333;
-        }
-        .form-group {
-          margin-bottom: 15px;
-        }
-        .form-group label {
-          display: block;
-          margin-bottom: 6px;
-          font-size: 14px;
-          color: #555;
-        }
-        .form-group input {
-          width: 100%;
-          padding: 10px;
-          border-radius: 6px;
-          border: 1px solid #ddd;
-        }
-        button {
-          width: 100%;
-          padding: 12px;
-          border: none;
-          border-radius: 6px;
-          background: #4e73df;
-          color: white;
-          font-weight: bold;
-          cursor: pointer;
-          margin-top: 10px;
-        }
-        button:hover {
-          background: #2e59d9;
-        }
-        .extra {
-          margin-top: 15px;
-          font-size: 14px;
-          text-align: center;
-        }
-        .extra a {
-          color: #4e73df;
-          text-decoration: none;
-        }
-        .extra a:hover {
-          text-decoration: underline;
-        }
-    </style>
 </head>
 <body>
 <div class="container">
     <h2>로그인</h2>
-    <form th:action="@{/login}" method="post">
+    <form id="loginForm">
         <div class="form-group">
-            <label for="username">아이디</label>
-            <input type="text" id="username" name="username" required/>
+            <label for="email">아이디</label>
+            <input type="text" id="email" name="email" required/>
         </div>
         <div class="form-group">
             <label for="password">비밀번호</label>
             <input type="password" id="password" name="password" required/>
         </div>
-        <button type="submit">로그인</button>
-        <div class="extra">
-            아직 회원이 아니신가요? <a th:href="@{/join}">회원가입</a>
+        <button type="submit" class="login-btn">로그인</button>
+        <div class="extra login">
+            아직 회원이 아니신가요? <a th:href="@{/register}">회원가입</a>
+        </div>
+        <!-- 소셜 로그인 버튼 -->
+        <div class="social-login">
+            <button class="social-btn google-btn" onclick="location.href='/oauth2/authorization/google'" type="button">
+                <!-- 구글 로고 SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.37 1.53 7.83 2.81l5.73-5.73C34.41 3.55 29.58 1 24 1 14.54 1 6.36 6.62 2.73 14.74l6.66 5.17C11.72 15.47 17.36 9.5 24 9.5z"/>
+                    <path fill="#34A853" d="M46.5 24c0-1.64-.14-2.88-.35-4.12H24v7.88h12.87c-.55 2.88-2.27 5.33-4.87 6.98l7.48 5.85C43.55 36.02 46.5 30.44 46.5 24z"/>
+                    <path fill="#FBBC05" d="M9.39 28.03C8.62 26.48 8.25 25.32 8.25 24s.37-2.48 1.14-4.03L2.73 14.74C.95 18.12 0 21.93 0 24s.95 5.88 2.73 9.26l6.66-5.23z"/>
+                    <path fill="#4285F4" d="M24 46.5c6.58 0 12.41-2.16 16.92-5.86l-7.48-5.85c-2.09 1.43-4.75 2.26-9.44 2.26-6.64 0-12.28-5.97-14.61-14.17l-6.66 5.17C6.36 41.38 14.54 46.5 24 46.5z"/>
+                    <path fill="none" d="M0 0h48v48H0z"/>
+                </svg>
+                구글로 로그인
+            </button>
+
+            <button class="social-btn github-btn" onclick="location.href='/oauth2/authorization/github'" type="button">
+                <!-- 깃허브 로고 SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white">
+                    <path d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.085 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.332-5.467-5.931 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.116-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 013.003-.404c1.018.005 2.043.137 3.003.404 2.29-1.552 3.296-1.23 3.296-1.23.654 1.653.242 2.873.118 3.176.77.84 1.236 1.91 1.236 3.22 0 4.61-2.807 5.625-5.48 5.921.43.372.823 1.103.823 2.222v3.293c0 .322.218.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+                깃허브로 로그인
+            </button>
         </div>
     </form>
 </div>

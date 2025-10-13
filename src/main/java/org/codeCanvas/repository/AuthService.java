@@ -3,8 +3,11 @@ package org.codeCanvas.repository;
 import lombok.RequiredArgsConstructor;
 import org.codeCanvas.domain.User;
 import org.codeCanvas.dto.AuthDTO;
+import org.codeCanvas.service.EmailVerficationService;
+import org.codeCanvas.util.JwtUtil;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -13,8 +16,10 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class AuthService {
-    private final JavaMailSender mailSender;
     private final UserRepository userRepository;
+    private final EmailVerficationService emailVerficationService;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
     // 회원가입 로직
     public boolean register(AuthDTO dto) {
@@ -25,6 +30,7 @@ public class AuthService {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRole("일반");
         user.setEnabled(false);
         user.setCreatedAt(LocalDateTime.now());
@@ -33,24 +39,24 @@ public class AuthService {
         user.setVerificationToken(token);
         // 정보 저장
         userRepository.save(user);
-        sendVerificationEmail(user);
+        emailVerficationService.sendVerificationEmail(user);
 
-        return false;
+        return true;
     }
 
-    // 이메일 전송 로직
-    public void sendVerificationEmail(User user) {
-        String link ="http://localhost:8099/verify?token=" + user.getVerificationToken();
-        String subject = "CodeCanvas 이메일 인증";
-        String body = "CodeCanvas 이메일 인증입니다. \n\n"
-                + "이메일 인증을 완료하려면 아래 링크를 클릭해주세요.: \n"
-                + link;
+    // 로그인 로직
+    public String login(AuthDTO dto) {
+        User user = userRepository.findByEmail(dto.getEmail());
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(user.getEmail());
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        if(user == null) {
+            return null;
+        }
+        if(!user.isEnabled()) {
+            return null;
+        }
+        if (!passwordEncoder.matches(dto.getPassword(), user.getPassword())) {
+            return null;
+        }
+        return jwtUtil.generatedAccessToken(user);
     }
 }

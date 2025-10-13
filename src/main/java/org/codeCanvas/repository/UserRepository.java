@@ -17,5 +17,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findByVerificationToken(String token);
     // 이메일 중복확인
     User findByEmail(String email);
-
+    // 소셜 로그인 위치(구글, 카카오 등), 소셜로그인 아이디 찾기
+    Optional<User> findByProviderAndProviderId(String provider, String providerId);
+    // 소셜로그인 아이디 찾기
+    Optional<User> findByProviderId(String providerId);
 }
