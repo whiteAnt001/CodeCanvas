@@ -1,14 +1,10 @@
 package org.codeCanvas.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Getter
@@ -17,11 +13,16 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
-    private String writer;
     private String title;
     private String content;
     private String board;
     private String image_name;
     private String image_original_name;
     private LocalDateTime regDate;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id") // FK 컬럼명
+    private User user;
+
+    private String writerName;
 }

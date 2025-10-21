@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title != null ? title + ' - CodeCanvas' : 'CodeCanvas'}">CodeCanvas</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+
+<body>
+<!-- 네비게이션 Fragment -->
+<nav th:fragment="navbar" class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/}">
+            <i class="fas fa-palette"></i> CodeCanvas
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${#strings.equals(activeMenu, 'home')} ? 'active' : ''"
+                       th:href="@{/}">홈</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${#strings.equals(activeMenu, 'projects')} ? 'active' : ''"
+                       th:href="@{/projects}">프로젝트</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${#strings.equals(activeMenu, 'board')} ? 'active' : ''"
+                       th:href="@{/board}">게시판</a>
+                </li>
+
+                <!-- 로그인하지 않은 경우 -->
+                <li class="nav-item" th:unless="${isLoggedIn}">
+                    <a class="nav-link" th:href="@{/login}">로그인</a>
+                </li>
+
+                <!-- 로그인한 경우 -->
+                <li class="nav-item dropdown" th:if="${isLoggedIn}">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i>
+                        <span th:text="${loginUser.username}">사용자</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" th:href="@{/mypage}">
+                            <i class="fas fa-user"></i> 마이페이지</a>
+                        </li>
+                        <li><a class="dropdown-item" th:href="@{/projects/new}">
+                            <i class="fas fa-plus"></i> 프로젝트 등록</a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" th:href="@{/api/auth/logout}">
+                            <i class="fas fa-sign-out-alt"></i> 로그아웃</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</body>
+</html>

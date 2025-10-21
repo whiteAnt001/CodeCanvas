@@ -2,8 +2,10 @@ package org.codeCanvas.service;
 
 import lombok.RequiredArgsConstructor;
 import org.codeCanvas.domain.Board;
+import org.codeCanvas.domain.User;
 import org.codeCanvas.dto.BoardDTO;
 import org.codeCanvas.repository.BoardRepository;
+import org.codeCanvas.repository.UserRepository;
 import org.codeCanvas.util.FileUploadUtil;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
 
-    public BoardDTO createBoard(BoardDTO dto) throws IOException {
+    public BoardDTO createBoard(BoardDTO dto, User user) throws IOException {
         Board board = new Board();
         board.setTitle(dto.getTitle());
         board.setContent(dto.getContent());
         board.setBoard(dto.getBoard());
-        board.setWriter(dto.getWriter());
+        board.setUser(user);
+        board.setWriterName(user.getUsername());
         board.setRegDate(LocalDateTime.now());
 
         if(dto.getFiles() != null && dto.getFiles().length > 0) {
@@ -35,6 +39,11 @@ public class BoardService {
 
         dto.setImage_name(board.getImage_name());
         return dto;
+    }
+
+    // 모든 게시글 가져오기
+    public List<Board> getBoardList() {
+        return boardRepository.findAll();
     }
 
     // 카테고리 별 최신 5개 게시글만 가져오기

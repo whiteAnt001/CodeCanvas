@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Controller
@@ -30,7 +31,15 @@ public class BoardController {
         Board board = boardService.findByIdx(idx).orElseThrow(() -> new NoSuchElementException("게시글이 존재하지 않습니다."));
         model.addAttribute("board", board);
 
-        return "user/board-view";
+        return "board/detail";
+    }
+
+    @GetMapping("")
+    public String board_list(Model model) {
+        List<Board> board = boardService.getBoardList();
+        model.addAttribute("board", board);
+
+        return "board/list";
     }
 
 }

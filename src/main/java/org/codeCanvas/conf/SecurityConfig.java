@@ -1,6 +1,8 @@
 package org.codeCanvas.conf;
 
+import lombok.RequiredArgsConstructor;
 import org.codeCanvas.service.CustomOAuth2UserService;
+import org.codeCanvas.util.CustomOAuth2SuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,13 +15,12 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomOAuth2SuccessHandler customOAuth2SuccessHandler;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService) {
-        this.customOAuth2UserService = customOAuth2UserService;
-    }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -40,7 +41,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(customOAuth2UserService) // OAuth2UserService 연결
                         )
-                        .defaultSuccessUrl("/", true) // OAuth 로그인 성공 후 이동
+                        .successHandler(customOAuth2SuccessHandler) // 로그인 후 작업
                 )
                 .logout(logout -> logout
                         .logoutUrl("/api/auth/logout")

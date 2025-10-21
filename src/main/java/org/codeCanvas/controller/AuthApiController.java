@@ -1,12 +1,11 @@
 package org.codeCanvas.controller;
 
 import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.codeCanvas.domain.User;
 import org.codeCanvas.dto.AuthDTO;
-import org.codeCanvas.repository.AuthService;
+import org.codeCanvas.service.AuthService;
 import org.codeCanvas.repository.UserRepository;
 import org.codeCanvas.util.JwtUtil;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submitBtn");
-    const boardType = document.getElementById("boardType");
+    const boardType = document.getElementById("board");
     const titleInput = document.getElementById("title");
     const contentInput = document.getElementById("content");
     const imagesInput = document.getElementById("images");
@@ -19,8 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         formData.append("data", new Blob([JSON.stringify({
             boardType: boardType.value,
             title: title,
-            content: content,
-            writer: "임시"
+            content: content
         })], {type: "application/json" }));
 
         for (const file of files) {
@@ -37,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const result = await res.json();
             console.log(result);
+            alert("게시글이 작성되었습니다!")
             location.href="/";
         } catch (err) {
             console.log(err);

@@ -1,5 +1,6 @@
 package org.codeCanvas.service;
 
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.codeCanvas.domain.User;
 import org.codeCanvas.repository.UserRepository;
@@ -10,6 +11,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -37,20 +39,9 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
             username = oAuth2User.getAttribute("name");
             email = oAuth2User.getAttribute("email");
         }
-
-        final String finalProvider = registrationId.toUpperCase();
-        final String finalProviderId = providerId;
-        final String finalEmail = email;
-
         // 기존 유저 조회
-        User user = userRepository.findByProviderAndProviderId(finalProvider, finalProviderId)
-                .orElseGet(() -> createUser(finalProvider, finalProviderId, finalEmail));
-
-        // username이 없는 경우 -> 닉네임 입력 유도
-        if (user.getUsername() == null) {
-            // 여기서 로그인 후 닉네임 입력 페이지로 리다이렉트하도록 컨트롤러에서 처리
-            // 예: /oauth/nickname
-        }
+        User user = userRepository.findByProviderAndProviderId(registrationId.toUpperCase(), providerId)
+                .orElseGet(() -> createUser(registrationId.toUpperCase(), providerId, email));
 
         return oAuth2User;
     }
@@ -62,6 +53,8 @@ public class CustomOAuth2UserService implements OAuth2UserService<OAuth2UserRequ
         newUser.setProviderId(providerId);
         newUser.setEmail(email);
         newUser.setUsername(null); // 아직 닉네임 없음
+        newUser.setRole("소셜");
+        newUser.setCreatedAt(LocalDateTime.now());
         return userRepository.save(newUser);
     }
 }

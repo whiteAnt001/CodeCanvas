@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board, Long> {
     Optional<Board> findByIdx(Long idx);
 
+    List<Board> findAll ();
+
     // 특정 카테고리 게시글 중 최신 5개만 가져오기?
     List<Board> findTop5ByBoardOrderByIdxDesc(String board);
 }

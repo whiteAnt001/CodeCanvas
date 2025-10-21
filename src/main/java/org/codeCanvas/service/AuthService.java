@@ -1,12 +1,10 @@
-package org.codeCanvas.repository;
+package org.codeCanvas.service;
 
 import lombok.RequiredArgsConstructor;
 import org.codeCanvas.domain.User;
 import org.codeCanvas.dto.AuthDTO;
-import org.codeCanvas.service.EmailVerficationService;
+import org.codeCanvas.repository.UserRepository;
 import org.codeCanvas.util.JwtUtil;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
